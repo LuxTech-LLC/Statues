@@ -6,25 +6,18 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import party.lemons.statues.init.StatuesNetwork;
 import party.lemons.statues.network.MessageUpdateEquipment;
-import party.lemons.statues.statue.EntityStatuePlayer;
-
 import javax.annotation.Nullable;
 
 public class ContainerStatue extends Container
 {
-	private InventoryPlayer inventoryPlayer;
-	private TileEntityStatue statue;
 
 	public ContainerStatue(EntityPlayer player, InventoryPlayer playerInventory, TileEntityStatue te)
 	{
 		super();
-		this.inventoryPlayer = playerInventory;
-		this.statue = te;
 
 		EntityEquipmentSlot[] slots = {EntityEquipmentSlot.FEET, EntityEquipmentSlot.LEGS, EntityEquipmentSlot.CHEST, EntityEquipmentSlot.HEAD};
 

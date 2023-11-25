@@ -33,7 +33,7 @@ public class ImageData {
 		try {
 			String name = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(block).getIconName();
 			ResourceLocation nameLoc = new ResourceLocation(name);
-			ResourceLocation resource = new ResourceLocation(nameLoc.getNamespace(),  "textures/" + nameLoc.getPath() + ".png");
+			ResourceLocation resource = new ResourceLocation(nameLoc.getResourceDomain(),  "textures/" + nameLoc.getResourcePath() + ".png");
 
 			BufferedImage origImage=ImageIO.read(Minecraft.getMinecraft().getResourceManager().getResource(resource).getInputStream());
 			BufferedImage image = new BufferedImage(origImage.getWidth(), origImage.getHeight(), 2);

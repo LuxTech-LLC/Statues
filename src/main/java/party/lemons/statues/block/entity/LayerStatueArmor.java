@@ -98,7 +98,6 @@ public class LayerStatueArmor extends LayerArmorBase<ModelBiped>
 				ModelBiped t = this.getModelFromSlot(slotIn);
 				t = getArmorModelHook(entityLivingBaseIn, itemstack, slotIn, t);
 				this.setModelSlotVisible(t, slotIn);
-				boolean flag = this.isLegSlot(slotIn);
 				this.renderer.bindTexture(this.getArmorResource(entityLivingBaseIn, itemstack, slotIn, null));
 
 				{

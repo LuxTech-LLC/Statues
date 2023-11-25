@@ -1,22 +1,11 @@
 package party.lemons.statues.statue;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockModelShapes;
 import net.minecraft.client.renderer.IImageBuffer;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.ResourceLocation;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.awt.image.ImageObserver;
-import java.io.File;
-import java.io.IOException;
 
 
 public class ImageStatueBufferDownload implements IImageBuffer

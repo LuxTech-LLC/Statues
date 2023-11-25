@@ -8,11 +8,9 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.client.resources.SkinManager;
 import net.minecraft.util.ResourceLocation;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -33,12 +31,14 @@ public class StatueTextureDownloaded extends AbstractTexture
 		effect = imageEffect;
 
 		bufferedImage=playerTextures.get(url);
+		
 		if(bufferedImage!=null) return;
 
 		ResourceLocation origLocation=new ResourceLocation("statues:skins/"+url);
 		TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
 		data = (ThreadDownloadImageData) texturemanager.getTexture(origLocation);
 		if (data == null) {
+		
 			data = new ThreadDownloadImageData(null, url, DefaultPlayerSkin.getDefaultSkin(id), new IImageBuffer() {
 				@Override
 				public BufferedImage parseUserSkin(BufferedImage image) {

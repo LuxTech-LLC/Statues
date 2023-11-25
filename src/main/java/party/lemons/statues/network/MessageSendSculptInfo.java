@@ -2,9 +2,6 @@ package party.lemons.statues.network;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
@@ -12,17 +9,12 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import party.lemons.statues.block.BlockStatue;
 import party.lemons.statues.block.entity.TileEntityStatue;
-import party.lemons.statues.handler.StatueEffectHelper;
 import party.lemons.statues.init.StatuesBlocks;
 import party.lemons.statues.init.StatuesSound;
 import party.lemons.statues.statue.DummyContainer;
 import party.lemons.statues.statue.StatueInfo;
-
-import java.util.Random;
 
 public class MessageSendSculptInfo implements IMessage
 {

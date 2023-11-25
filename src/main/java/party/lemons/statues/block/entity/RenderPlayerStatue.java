@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.layers.*;
 import net.minecraft.client.renderer.texture.ITextureObject;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 import party.lemons.statues.statue.EntityStatuePlayer;
 
 import javax.annotation.Nullable;

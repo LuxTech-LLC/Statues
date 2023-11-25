@@ -4,7 +4,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -32,8 +31,6 @@ public class GuiSculpt extends GuiScreenPlus
 	int worldX,worldY,worldZ;
 	int face;
 	IBlockState block;
-	private int	mouseX;
-	private int	mouseY;
 
 	Gui2dScroller scrollerAR;
 	Gui2dScroller scrollerAL;
