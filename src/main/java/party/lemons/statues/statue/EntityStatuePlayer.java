@@ -1,7 +1,6 @@
 package party.lemons.statues.statue;
 
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import com.luxtechllc.statues.support.GetRequest;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -23,8 +22,8 @@ import party.lemons.statues.Statues;
 import party.lemons.statues.block.BlockStatue;
 import party.lemons.statues.block.entity.TileEntityStatue;
 
+import java.io.IOException;
 import java.util.UUID;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -163,47 +162,67 @@ public class EntityStatuePlayer extends EntityBadIdea
 			skin = steveSkin;
 			dataSkin = steveDataSkin;
 		}
-	}
-
+	}	
+	
+	
+	
+	
+	
 	@SideOnly(Side.CLIENT)
 	public ITextureObject getTextureForSkin(ResourceLocation skin, AbstractTexture fallbackSkin, String name, IBlockState state, byte facing)
 	{
+		
+		UUID uuid = null;
+		JSONObject responseJson = new JSONObject();			
+		String responseString = null;
+		
 		TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
 		AbstractTexture tex = (AbstractTexture) texturemanager.getTexture(skin);
-
+		
+		
+     	//if texture is not already downloaded
 		if (tex == null) {
 			
-			UUID uuid = null;
+			//ensure username is valid
+			name = name.replace(" ", "");
+			if(name.length() < 3 || name.matches("/[^_a-zA-Z0-9]/g")) {
+				return fallbackSkin;
+			}
 			
-			Unirest.setTimeouts(0, 0);
-			String response = null;
 			try {
-				response = Unirest.get("https://api.mojang.com/users/profiles/minecraft/"+name).header("Accept", "application/json").asString().getBody();
-			} catch (UnirestException e) {
-				// TODO Auto-generated catch block
+				responseJson = GetRequest.getURL("http://api.mojang.com/users/profiles/minecraft/"+name);
+			} catch (IOException e) {
+				System.out.println("Error Getting UUID from Mojang API");
 				e.printStackTrace();
 			}
-
 			
-			JSONObject responseJson = new JSONObject(response);
+			if (responseJson == null) {
+				responseJson = new JSONObject();
+				responseJson.put("id", "53909932f79433c09329948045a4c1ce");
+			}
+		
+			//get the UUID out of the JSON object and convert to string
 			try{
 				responseJson.get("id");
-				response = responseJson.get("id").toString();
+				responseString = responseJson.get("id").toString();
 			}
 			catch(JSONException e){
-				response = "501d23e64f43389aa06ae1cc7e48ba1c";
+				System.out.println("Could not extract UUID from JSON result");
+				e.printStackTrace();
 			}
 			
-			
-			response = new StringBuilder(response)
+			// convert to proper UUID format. (API gives without dashes)
+			responseString = new StringBuilder(responseString)
 	        .insert(20, '-')
 	        .insert(16, '-')
 	        .insert(12, '-')
 	        .insert(8, '-')
 	        .toString();
-					
-				uuid = UUID.fromString(response);
 			
+			//convert from string to UUID Object.
+			uuid = UUID.fromString(responseString);
+			
+			//download the skin texture associated with that UUID.
 			tex = new StatueTextureDownloaded(uuid, skin, Statues.skinServerLocation + uuid + ".png", fallbackSkin, new ImageStatueBufferDownload(this, state, facing, name+"."+state));
 			texturemanager.loadTexture(skin, tex);
 		}
